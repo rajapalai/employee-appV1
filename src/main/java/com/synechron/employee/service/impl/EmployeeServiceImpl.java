@@ -7,14 +7,12 @@ import com.synechron.employee.service.EmployeeService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.ok;
 
 @Service
@@ -45,25 +43,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
-    //new method
+    // delete employee object through post mapping
     @Override
     public Employee deleteByEmpId(Integer id, Employee entity) {
         try {
-            if (repository.findById(id).isPresent())
                 repository.deleteById(id);
         }catch (Exception e){
             throw new ResourceNotFoundException("Employee", "employeeId", id);
         }
-        return null;
+        return entity;
     }
-    //    public EmployeeDTO delete_v1(Integer id) {
-//        if (userrRepository.findById(id).isPresent()) {
-//            userrRepository.deleteById(id);
-//            return ResponseEntity.ok().body("User deleted with success");
-//        } else {
-//            return ResponseEntity.unprocessableEntity().body("user to be deleted not exist");
-//        }
-//    }
 
     @Override
     public Optional<Employee> findById(Integer id) {

@@ -10,19 +10,19 @@ public class EmployeeDTO {
     // employee FirstName should not be empty or null
     // FirstName should have at least 6 to 10 characters
     @NotEmpty
-    @Size(min = 10, message = "Please Enter Employee FirstName And FirstName Must Be at Least 6 to 10 characters")
+    @Size(min = 3, message = "Please Enter Employee FirstName And FirstName Must Be at Least 3 to 10 characters")
     private String employeeFirstName;
 
     // employee LastName should not be empty or null
     // LastName should have at least 6 to 10 characters
     @NotEmpty
-    @Size(min = 10, message = "Please Enter Employee LastName And LastName Must Be at Least 6 to 10 characters")
+    @Size(min = 3, message = "Please Enter Employee LastName And LastName Must Be at Least 3 to 10 characters")
     private String employeeLastName;
 
     // employee Department should not be empty or null
     // Department should have at least 6 to 10 characters
     @NotEmpty
-    @Size(min = 10, message = "Please Enter Department Name And Department Must Be at Least 6 to 10 characters")
+    @Size(min = 3, message = "Please Enter Department Name And Department Must Be at Least 3 to 10 characters")
     private String department;
 
     @DecimalMin(value = "1.0", message = "Please Enter a valid Salary Amount")

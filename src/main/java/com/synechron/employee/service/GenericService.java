@@ -3,7 +3,6 @@ package com.synechron.employee.service;
 import com.synechron.employee.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +14,8 @@ public interface GenericService<E, M> {
 
     void deleteById(M id);
 
-    //new method
-    E deleteByEmpId (M id, E entity);
+    // delete employee object through post mapping
+    Employee deleteByEmpId (M id, E entity);
 
     Optional<E> findById(M id);
 

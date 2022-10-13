@@ -9,7 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.spring.web.readers.operation.ResponseMessagesReader;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -52,9 +54,11 @@ public class EmployeeControllerImpl implements EmployeeController {
     @Override
     @PostMapping("/v3/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public EmployeeDTO deleteEmpByEmpId( @RequestBody EmployeeDTO employeeDTO,@PathVariable("id") Integer id) {
+    public ResponseEntity<String> deleteEmpByEmpId(@RequestBody EmployeeDTO employeeDTO, @PathVariable("id") Integer id) {
         Employee employee = employeeMapper.asEntity(employeeDTO);
-        return employeeMapper.asDTO(employeeService.deleteByEmpId(id,employee));
+        employeeMapper.asDTO(employeeService.deleteByEmpId(id, employee));
+        return new ResponseEntity<String>("Employee Data With Id :" + id + " Delete Successfully", HttpStatus.ACCEPTED);
+
     }
 
     @Override

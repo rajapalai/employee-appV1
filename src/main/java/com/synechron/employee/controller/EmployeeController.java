@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,9 +22,9 @@ public interface EmployeeController {
     @ApiOperation("Delete based on primary key")
     public void delete(@PathVariable("id") Integer id);
 
-    //new method
+    // delete employee object through post mapping
     @ApiOperation("Delete emp by post")
-    public EmployeeDTO deleteEmpByEmpId(@RequestBody EmployeeDTO dto,@PathVariable("id") Integer id);
+    public ResponseEntity<String> deleteEmpByEmpId(@RequestBody EmployeeDTO employee, @PathVariable("id") Integer id);
 
     @ApiOperation("Find all data")
     public List<EmployeeDTO> list();
