@@ -12,13 +12,13 @@ pipeline {
 				sh 'mvn clean install'
 			}
 		}
-		stage ('Maven build') {
+		stage ('Maven Build') {
 			steps {
 				sh 'mvn package'
 			}
 		}
 
-		stage ('Jfrog artifactory configuration') {
+		stage ('Jfrog Artifactory Configuration') {
 			steps {
 				rtServer (
 						id: "jfrog",
@@ -41,7 +41,7 @@ pipeline {
 						)
 			}
 		}
-		stage ('Jfrog artifactory deployment') {
+		stage ('Jfrog Artifactory Deployment') {
 			steps {
 				rtMavenRun (
 						tool: "maven",
@@ -52,7 +52,7 @@ pipeline {
 						)
 			}
 		}
-		stage ('Deploy artifacts into libs-release-local file') {
+		stage ('Deploy Artifacts Into libs-release-local File') {
 			steps {
 				rtUpload (
 						serverId: "jfrog",
@@ -75,5 +75,22 @@ pipeline {
 						)
 			}
 		}
+		stage ('Build Docker Image') {
+		    steps {
+		        script {
+		            sh 'docker build -t rajapalai/employee-appV1 .'
+		        }
+		    }
+		}
+		stage ('Push Docker Image To Docker Hub Repository') {
+            steps {
+        		script {
+        		    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+        		        sh 'docker login -u rajapalai -p ${dockerhubpwd}'
+                    }
+                        sh 'docker push rajapalai/employee-appv1'
+        		}
+        	}
+        }
 	}
 }
