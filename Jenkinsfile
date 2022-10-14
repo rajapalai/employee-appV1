@@ -59,7 +59,7 @@ pipeline {
 						spec: '''{
 		 						"files" : [
 		 							{
-		 							"pattern" : "employee-appV1.jar",
+		 							"pattern" : "employee-application.jar",
 		 							"target" : "libs-release-local"
 		 							}
 		 						]
