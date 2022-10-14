@@ -137,7 +137,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>employee-appV1</finalName>
+		<finalName>employee-application</finalName>
 	</build>
 
 	<distributionManagement>

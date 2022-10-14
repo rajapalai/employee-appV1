@@ -78,7 +78,7 @@ pipeline {
 		stage ('Build Docker Image') {
 		    steps {
 		        script {
-		            sh 'docker build -t rajapalai/employee-appV1 .'
+		            sh 'docker build -t rajapalai/employee-application .'
 		        }
 		    }
 		}
