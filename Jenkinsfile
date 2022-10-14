@@ -88,7 +88,7 @@ pipeline {
         		    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
         		        sh 'docker login -u rajapalai -p ${dockerhubpwd}'
                     }
-                        sh 'docker push rajapalai/employee-appv1'
+                        sh 'docker push rajapalai/employee-app'
         		}
         	}
         }
