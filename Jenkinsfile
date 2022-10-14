@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+    registry = "rajapalai/employee-app"
+    registryCredential = 'docker'
+    dockerImage = ''
+  }
 	agent any
 	tools {
 		maven 'maven'
@@ -78,17 +83,21 @@ pipeline {
 		stage ('Build Docker Image') {
 		    steps {
 		        script {
-		            sh 'docker build -t rajapalai/employee-application .'
+		           // sh 'docker build -t rajapalai/employee-application .'
+		           dockerImage = docker.build registry + ":$BUILD_NUMBER"
 		        }
 		    }
 		}
 		stage ('Push Docker Image To Docker Hub Repository') {
             steps {
         		script {
-        		    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-        		        sh 'docker login -u rajapalai -p ${dockerhubpwd}'
-                    }
-                        sh 'docker push rajapalai/employee-app'
+        		  //  withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+        		  //      sh 'docker login -u rajapalai -p ${dockerhubpwd}'
+            //         }
+            //             sh 'docker push rajapalai/employee-app'
+                        docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                     }
         		}
         	}
         }
